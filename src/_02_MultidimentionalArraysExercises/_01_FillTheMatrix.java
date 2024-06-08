@@ -21,8 +21,8 @@ public class _01_FillTheMatrix {
     }
     public static void patternA(int[][] matrix, int size){
         int value = 1;
-        for (int row = 0 ; row < size; row++) {
-            for (int col = 0; col < size; col++) {
+        for (int col = 0 ; col < size; col++) {
+            for (int row = 0; row < size; row++) {
                 matrix[row][col] = value;
                 value++;
             }
@@ -30,11 +30,17 @@ public class _01_FillTheMatrix {
     }
     public static void patternB(int[][] matrix, int size){
         int value = 1;
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
+        for (int col = 0; col < size; col++) {
+            for (int row = 0; row < size; row++) {
                 matrix[row][col] = value;
+                value++;
             }
-            row++;
+            col++;
+            if (col==size) break;
+            for (int row = size-1; row >= 0; row--) {
+                matrix[row][col] = value;
+                value++;
+            }
 
         }
     }
