@@ -10,39 +10,62 @@ public class _02_FishingBoat {
         String[][] map = new String[size][size];
         map = fillMatrix(map , scanner);
         int[] currentPosition = getStart(map);
+        int fishCaught = 0;
         // System.out.println(Arrays.toString(currentPosition));
         String input = scanner.nextLine();
-        int fishCaught = 0;
+
         while (!input.equals("collect the nets")){
             int[] direction = getDirection(input);
-            String[] event = getEvent(map , currentPosition, direction);
-            switch(event[0]){
-                case "-", "S":
-                    currentPosition[0]+= Integer.parseInt(event[1]);
-                    currentPosition[1]+= Integer.parseInt(event[2]);
-                    break;
-                case "W":
-                    currentPosition[0]+= Integer.parseInt(event[1]);
-                    currentPosition[1]+= Integer.parseInt(event[2]);
-                    System.out.printf("You fell into a whirlpool! The ship sank and you lost the fish you caught. Last coordinates of the ship: [%d,%d]", currentPosition[0], currentPosition[1] );
-                    fishCaught = 0;
-                    return;
-                default:
-                    fishCaught += Integer.parseInt(event[0]);
-                    currentPosition[0]+= Integer.parseInt(event[1]);
-                    currentPosition[1]+= Integer.parseInt(event[2]);
-                    map[currentPosition[0]][currentPosition[1]] = "-";
+            map[currentPosition[0]][currentPosition[1]] = "-";
+            currentPosition = makeMove(currentPosition, direction, size);
+            String event = map[currentPosition[0]][currentPosition[1]];
+            if (event.equals("W")){
+                System.out.printf("You fell into a whirlpool! The ship sank and you lost the fish you caught. Last coordinates of the ship: [%d,%d]", currentPosition[0], currentPosition[1]);
+                return;
             }
+            if (event.equals("-")){
 
+                input = scanner.nextLine();
+                //printMap(map);
+                continue;
+            }
+            fishCaught+= Integer.parseInt(event);
+            map[currentPosition[0]][currentPosition[1]] = "-";
+            //printMap(map);
             input = scanner.nextLine();
         }
         if (fishCaught >= 20){
             System.out.println("Success! You managed to reach the quota!");
-            System.out.printf("%nAmount of fish caught: %d tons.", fishCaught);
-        } else {
-            System.out.printf("You didn't catch enough fish and didn't reach the quota!%nYou need %d tons of fish more.", 20 - fishCaught);
+            } else {
+            System.out.printf("You didn't catch enough fish and didn't reach the quota! You need %d tons of fish more.%n", 20 - fishCaught);
         }
+        System.out.printf("Amount of fish caught: %d tons.%n", fishCaught);
+        printMap(map);
     }
+
+    private static int[] makeMove(int[] currentPosition, int[] direction, int size) {
+        int[] newPosition = {currentPosition[0],currentPosition[1]};
+        int row = 0;
+        if (currentPosition[0]+direction[0] < size && currentPosition[0]+direction[0] >= 0 ) {
+            row = currentPosition[0] + direction[0];
+        } else {
+            if (currentPosition[0] + direction[0] < 0){
+                row = size-1;
+            }
+        }
+        int col = 0;
+        if (currentPosition[1]+direction[1] < size && currentPosition[1]+direction[1] >= 0 ) {
+            col = currentPosition[1] + direction[1];
+        } else {
+            if (currentPosition[1] + direction[1] < 0){
+                col = size-1;
+            }
+        }
+        newPosition[0] = row;
+        newPosition[1] = col;
+        return newPosition;
+    }
+
 
     private static void printMap(String[][] map) {
         for (int i = 0; i < map.length; i++) {
@@ -66,44 +89,21 @@ public class _02_FishingBoat {
         return start;
     }
 
-    private static String[] getEvent(String[][] map, int[] currentPosition, int[] direction) {
-        String[] event = {"","",""};
-        int row = 0;
-        if (currentPosition[0]+direction[0] < map.length-1 || currentPosition[0]+direction[0] > 0 ) {
-            row = currentPosition[0] + direction[0];
-        } else {
-            if (currentPosition[0] + direction[0] < 0){
-                row = map.length-1;
-            }
-        }
-        int col = 0;
-        if (currentPosition[1]+direction[1] < map.length-1 || currentPosition[1]+direction[1] > 0 ) {
-            col = currentPosition[1] + direction[1];
-        } else {
-            if (currentPosition[1] + direction[1] < 0){
-                col = map.length-1;
-            }
-        }
-        event[0] = map[row][col];
-        event[1] = Integer.toString(row);
-        event[2] = Integer.toString(col);
-        return event;
-    }
 
     private static int[] getDirection(String input) {
         int[] direction = {0,0};
         switch (input){
             case "up":
-                direction[1] = -1;
-                break;
-            case "down":
-                direction[1] = 1;
-                break;
-            case "left":
                 direction[0] = -1;
                 break;
-            case "right":
+            case "down":
                 direction[0] = 1;
+                break;
+            case "left":
+                direction[1] = -1;
+                break;
+            case "right":
+                direction[1] = 1;
                 break;
         }
         return direction;
