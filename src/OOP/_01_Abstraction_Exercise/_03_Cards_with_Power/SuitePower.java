@@ -5,6 +5,7 @@ public enum SuitePower {
     private final int power;
 
     SuitePower(int power){
+
         this.power = power;
     }
     public int getPower(){

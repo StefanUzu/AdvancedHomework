@@ -1,9 +1,5 @@
 package OOP._01_Abstraction_Exercise._01_Card_Suits;
-
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Stream;
-
 public class Main {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);

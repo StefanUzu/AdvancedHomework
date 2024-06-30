@@ -18,6 +18,7 @@ public enum CardPowers {
     private final int power;
 
     CardPowers(int power) {
+
         this.power = power;
     }
     public int getPower(){
