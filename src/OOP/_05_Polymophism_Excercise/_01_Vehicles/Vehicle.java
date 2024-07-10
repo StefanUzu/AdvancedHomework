@@ -4,20 +4,26 @@ public class Vehicle {
     private double fuelQuantity;
     private final double fuelConsumption;
 
-    public Vehicle(double fuelConsumption, double fuelQuantity) {
-        this.fuelConsumption = fuelConsumption;
+    public Vehicle( double fuelQuantity , double fuelConsumption ) {
         this.fuelQuantity = fuelQuantity;
+        this.fuelConsumption = fuelConsumption;
     }
-    public void drive( int distance, Vehicle vehicle ) {
-        if ( distance * this.fuelConsumption <= this.fuelQuantity ) {
-            System.out.printf("Car travelled %d km", distance);
-            setFuelQuantity( this.fuelQuantity - distance * this.fuelConsumption );
+    public void drive( double distance, Vehicle vehicle ) {
+        if ( distance * vehicle.fuelConsumption <= vehicle.fuelQuantity ) {
+            System.out.printf("Car travelled %f km", distance);
+            setFuelQuantity( vehicle.getFuelQuantity() - distance * this.fuelConsumption );
         } else {
             System.out.printf("%s needs refueling", vehicle.getClass().getSimpleName());
         }
     }
 
-    public double getFuelQuantity() { return fuelQuantity; }
-    public void addFuelQuantity(int refuelAmount) { fuelQuantity += refuelAmount; }
-    public void setFuelQuantity(double fuelQuantity) { this.fuelQuantity = fuelQuantity; }
+    public double getFuelQuantity() {
+        return fuelQuantity;
+    }
+    public void refuel(double refuelAmount) {
+        fuelQuantity += refuelAmount;
+    }
+    public void setFuelQuantity(double fuelQuantity) {
+        this.fuelQuantity = fuelQuantity;
+    }
 }
