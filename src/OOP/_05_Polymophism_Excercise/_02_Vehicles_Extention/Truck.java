@@ -1,8 +1,7 @@
-package OOP._05_Polymophism_Excercise._01_Vehicles;
-
+package OOP._05_Polymophism_Excercise._02_Vehicles_Extention;
 public class Truck extends Vehicle {
-    Truck(double fuelQuantity, double fuelConsumption) {
-        super(fuelQuantity, fuelConsumption + 1.6 );
+    Truck(double fuelQuantity, double fuelConsumption, double fuelCapacity) {
+        super(fuelQuantity, fuelConsumption + 1.6 , fuelCapacity);
     }
 
     @Override
