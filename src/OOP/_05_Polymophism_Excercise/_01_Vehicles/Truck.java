@@ -7,6 +7,7 @@ public class Truck extends Vehicle {
 
     @Override
     public void refuel(double fuelToRefill) {
+
         double fuelMinusLeaks = fuelToRefill * 0.95;
         setFuelQuantity(getFuelQuantity() + fuelMinusLeaks);
     }
