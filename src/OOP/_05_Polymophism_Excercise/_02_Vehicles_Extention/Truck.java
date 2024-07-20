@@ -5,8 +5,16 @@ public class Truck extends Vehicle {
     }
 
     @Override
-    public void refuel(double fuelToRefill) {
-        double fuelMinusLeaks = fuelToRefill * 0.95;
+    public void refuel( double refuelAmount ) {
+        if (refuelAmount <= 0 ) {
+            System.out.println("Fuel must be a positive number");
+            return;
+        }
+        if (refuelAmount + this.fuelQuantity > this.getFuelCapacity()) {
+            System.out.println("Cannot fit fuel in tank");
+            return;
+        }
+        double fuelMinusLeaks = refuelAmount * 0.95;
         setFuelQuantity(getFuelQuantity() + fuelMinusLeaks);
     }
 }

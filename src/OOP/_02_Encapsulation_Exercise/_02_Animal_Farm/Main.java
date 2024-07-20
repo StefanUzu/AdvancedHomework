@@ -1,0 +1,17 @@
+package OOP._02_Encapsulation_Exercise._02_Animal_Farm;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        String name = scanner.nextLine();
+        int age = Integer.parseInt(scanner.nextLine());
+
+        Chicken chicken = new Chicken(name, age);
+
+        System.out.println(chicken);
+    }
+}
