@@ -56,12 +56,11 @@ public class Engine implements Runnable {
 			case "fight":
 				result = this.fightCommand(data);
 				break;
-<<<<<<< HEAD
+
 			case "retire":
 				result = this.retireUnitCommand(data);
 				break;
-=======
->>>>>>> origin/master
+
 			default:
 				throw new RuntimeException("Invalid command!");
 		}
@@ -84,13 +83,11 @@ public class Engine implements Runnable {
 	private String fightCommand(String[] data) {
 		return "fight";
 	}
-<<<<<<< HEAD
 
 	private String retireUnitCommand(String[] data) throws ExecutionControl.NotImplementedException {
 		String unitType = data[1];
 		this.repository.removeUnit(unitType);
         return unitType + " retired!";
 	}
-=======
->>>>>>> origin/master
+
 }
