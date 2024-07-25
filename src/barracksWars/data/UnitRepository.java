@@ -38,6 +38,7 @@ public class UnitRepository implements Repository {
 		return statBuilder.toString();
 	}
 
+<<<<<<< HEAD
 	public void removeUnit(String unitType)  {
 		// TODO: implement for problem 4
 		if (amountOfUnits.containsKey(unitType) && amountOfUnits.get(unitType) > 0) {
@@ -46,5 +47,10 @@ public class UnitRepository implements Repository {
 		} else {
 			throw new IllegalArgumentException("No such units in repository.");
 		}
+=======
+	public void removeUnit(String unitType) throws ExecutionControl.NotImplementedException {
+		// TODO: implement for problem 4
+		throw new ExecutionControl.NotImplementedException("message");
+>>>>>>> origin/master
 	}
 }

@@ -11,7 +11,10 @@ public class Main {
         String command = scanner.nextLine();
 
         while (!command.equals("HARVEST")) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             switch (command) {
                 case "private":
                     Arrays.stream(clazz.getDeclaredFields())
@@ -37,5 +40,8 @@ public class Main {
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 }
