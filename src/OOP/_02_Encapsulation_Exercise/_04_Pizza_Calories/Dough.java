@@ -11,11 +11,21 @@ public class Dough {
         setWeight(weight);
     }
     private void setWeight(double weight) {
-        this.weight = weight;
+        if (weight >= 0 && weight <= 200) {
+            this.weight = weight;
+            return;
+        }
+        throw new IllegalArgumentException("Dough weight should be in the range [1..200].");
     }
 
     private void setFlourType(String flourType) {
-        this.flourType = flourType;
+        try {
+            Dough_Modifiers.valueOf(flourType);
+            this.flourType = flourType;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid type of dough.");
+        }
+
     }
 
     private void setBakingTechnique(String bakingTechnique) {
@@ -23,6 +33,7 @@ public class Dough {
     }
 
     public double calculateCalories() {
-        return 42.69;
+        double doughMod = Dough_Modifiers.valueOf(flourType).getDoughModifier() * Dough_Modifiers.valueOf(bakingTechnique).getDoughModifier() ;
+        return weight * doughMod;
     }
 }

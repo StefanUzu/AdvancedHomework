@@ -6,14 +6,28 @@ public class Topping {
 
     Topping(String toppingType, double weight) {
         setToppingType(toppingType);
-        setWeight(weight);
+        setWeight(weight, toppingType);
     }
 
     private void setToppingType(String toppingType) {
-        this.toppingType = toppingType;
+        try { Topping_Modifiers.valueOf(toppingType);
+            this.toppingType = toppingType;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(String.format("Cannot place %s on top of your pizza." , toppingType));
+        }
+
     }
 
-    private void setWeight(double weight) {
-        this.weight = weight;
+    private void setWeight(double weight, String toppingType) {
+        if (weight >= 1 && weight <= 50) {
+            this.weight = weight;
+            return;
+        }
+        throw new IllegalArgumentException(String.format("%s weight should be in the range [1..50].",toppingType));
+    }
+
+    public double toppingCalories() {
+        double toppingMod = Topping_Modifiers.valueOf(this.toppingType).getToppingModifiers();
+        return this.weight * toppingMod;
     }
 }
